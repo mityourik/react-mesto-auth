@@ -7,6 +7,9 @@
 @import url(../blocks/header/__link-name/header__auth-link);
 @import url(../blocks/header/__logout-container/header__logout-container.css);
 @import url(../blocks/header/__email/header__email.css);
+@import url(../blocks/header/__menu-icon/header__menu-icon.css);
+@import url(../blocks/header/__navbar-button/header__navbar-button.css);
+@import url(../blocks/header/__dropdown-menu/header__dropdown-menu.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__config/profile__config.css);
 @import url(../blocks/profile/__image/profile__image.css);

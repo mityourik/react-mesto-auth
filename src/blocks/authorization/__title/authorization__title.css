@@ -9,3 +9,10 @@
     margin: 0;
     color: #fff;
 }
+
+@media screen and (max-width: 729px) {
+    .authorization__title {
+        font-size: 20px;
+        line-height: normal;
+    }
+  }

@@ -1,0 +1,11 @@
+.header__menu-icon {
+    display: none;
+    width: 24px;
+    height: 18px;
+}
+
+@media screen and (max-width: 729px) {
+    .header__menu-icon {
+        display: block;
+    }
+}
