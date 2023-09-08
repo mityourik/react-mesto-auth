@@ -10,5 +10,8 @@
 @media screen and (max-width: 729px) {
     .header__navbar-button {
         display: flex;
+        margin-top: 5px;
+        width: 20px;
+        height: 20px;
     }
 }

@@ -7,6 +7,6 @@
 
 @media screen and (max-width: 729px) {
     .header__logout-container {
-        margin: 0 30px 25px 0;
+        display: none;
     }
 }
