@@ -2,10 +2,17 @@ import React from "react";
 import doneIcon from "../images/infoTooltip__done-icon.svg";
 import errorIcon from "../images/infoTooltip__error-icon.svg";
 
-function InfoTooltip({ tooltipIcon, title, isOpen, onClose, onOverlayClose }) {
+function InfoTooltip({ tooltipIcon, title, isOpen, onClose }) {
+
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) {
+        onClose();
+    }
+  }
+
 
   return (
-    <div className={`popup popup_content_tooltip ${isOpen ? "popup_opened" : ""}`} onClick={onOverlayClose}>
+    <div className={`popup popup_content_tooltip ${isOpen ? "popup_opened" : ""}`} onClick={handleOverlayClick}>
       <div className="popup__container-tooltip">
         <div className="popup__icon-tooltip">
           {tooltipIcon === "success" && (

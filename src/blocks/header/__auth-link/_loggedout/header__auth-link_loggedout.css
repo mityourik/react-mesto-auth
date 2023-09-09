@@ -16,12 +16,12 @@
 
 .header__auth-link_loggedout:hover {
     opacity: 0.6;
-  }
+}
   
-  @media screen and (max-width: 729px) {
+@media screen and (max-width: 729px) {
     .header__auth-link_loggedout {
         font-size: 14px;
         line-height: normal;
         margin: 9px 0 0 0;
     }
-  }
+}

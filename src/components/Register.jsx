@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Register({ onRegister }) {
+function Register({ onRegister, isPreloading }) {
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const [userData, setUserData] = useState({
     email: "",
     password: ""
@@ -12,13 +16,33 @@ function Register({ onRegister }) {
     setUserData({
       ...userData,
       [name]: value
-    })
+    });
+
+    if (name === "email") {
+      if (!value.includes("@")) {
+        setEmailError("Email должен содержать @");
+      } else {
+        setEmailError("");
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 8) {
+        setPasswordError("Пароль должен содержать минимум 8 символов");
+      } else {
+        setPasswordError("");
+      }
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     const { email, password } = userData;
+    setIsLoading(true);
     onRegister(password, email);// вызов функции с данными пользователя для передачи
+    if (!emailError && !passwordError) {
+      onRegister(password, email);
+    }
   }
 
   return (
@@ -36,7 +60,10 @@ function Register({ onRegister }) {
           required />
         <span
           className="authorization__span"
-          id="authorization-email-error" />
+          id="authorization-email-error" 
+        >
+          {emailError}
+        </span>
         <input
           id="authorization-password"
           type="password"
@@ -48,12 +75,15 @@ function Register({ onRegister }) {
           required />
         <span
           className="authorization__span"
-          id="authorization-password-error" />
+          id="authorization-password-error"
+        >
+          {passwordError}
+        </span>
         <button
           className="authorization__submit-button"
           type="submit"
         >
-          Зарегистрироваться
+          {isPreloading ? "Загрузка..." : "Зарегистрироваться"}
         </button>
         <Link className="authorization__link" to="/sign-in">
           Уже зарегистрированы? Войти

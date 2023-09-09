@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from "react-router-dom";
 
-function DropdownMenu({ email, signOut }) {
+const DropdownMenu = forwardRef(({ email, signOut }, ref) => {
     return (
-        <div className="header__dropdown-container">
+        <div ref={ref} className="header__dropdown-container">
             <p className="header__dropdown-email">{email}</p>
             <Link
                 className="header__dropdown-link"
@@ -13,6 +13,6 @@ function DropdownMenu({ email, signOut }) {
             </Link>
         </div>
     );
-}
+});
 
 export default DropdownMenu;

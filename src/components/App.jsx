@@ -203,6 +203,7 @@
     }, []);
 
     function handleLogin(password, email) {
+      setIsPreloading(true);
       auth.authorize(password, email)
         .then(res => {
           localStorage.setItem('jwt', res.token);
@@ -215,10 +216,12 @@
         .catch(err => {
           onError();
           console.log(err);
-        });
+        })
+        .finally(() => setIsPreloading(false));
     }
 
     function handleRegister(password, email) {
+      setIsPreloading(true);
       auth.register(password, email)
         .then(() => {
           navigate("/sign_in");
@@ -227,7 +230,8 @@
         .catch(err => {
           onError();
           console.log(err);
-        });
+        })
+        .finally(() => setIsPreloading(false));
     }
 
     function signOut() {
@@ -261,7 +265,8 @@
             <Route 
               path="/sign-in" 
               element={
-                <Login 
+                <Login
+                  isPreloading={isPreloading}
                   onLogin={handleLogin} 
                   setEmail={setEmail} />}
             />
@@ -269,6 +274,7 @@
               path="/sign-up"
               element={
                 <Register
+                  isPreloading={isPreloading}
                   onRegister={handleRegister} />}
             />
             <Route
@@ -321,7 +327,6 @@
             tooltipIcon={tooltipIcon}
             isOpen={isInfoTooltipPopupOpen}
             onClose={closeAllPopups}
-            //добавить onOverlayClose={}
           />
 
         </div>

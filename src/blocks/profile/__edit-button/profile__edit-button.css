@@ -14,7 +14,7 @@
     opacity: 0.6;
 }
 
-@media screen and (max-width: 728px) {
+@media screen and (max-width: 729px) {
     .profile__edit-button {
         background-image: url(../../../images/profile__edit-button_small.svg);
         width: 18px;

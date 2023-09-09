@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import headerLogo from '../images/header__logo.svg';
 import headerNavbarIcon from '../images/header__navbar-icon.svg';
 import headerNavbarCloseIcon from '../images/popup__close-button.svg';
@@ -8,6 +8,21 @@ import DropdownMenu from './DropdownMenu';
 function Header({ email, signOut, loggedIn }) {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);//состояние выпадающего меню
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsMenuOpen(false);
+        }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,7 +34,7 @@ function Header({ email, signOut, loggedIn }) {
   return (
     <header className="header">
       {isMenuOpen && loggedIn && (
-        <DropdownMenu email={email} signOut={signOut}/>
+        <DropdownMenu email={email} signOut={signOut} ref={dropdownRef}/>
       )}
       <div className='header__logo-container'>
         <img src={headerLogo} alt="Лого Место" className="header__logo" />

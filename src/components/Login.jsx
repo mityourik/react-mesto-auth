@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 
-function Login({ onLogin }) {
+function Login({ onLogin, isPreloading }) {
   const [formValue, setFormValue] = useState({
     password: "",
     email: "",
   });
 
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   function handleSubmit(e) {
     e.preventDefault();
     const { email, password } = formValue;
-    onLogin(password, email);
+    
+    if (!emailError && !passwordError) {
+      onLogin(password, email);
+    }
   }
 
   function handleChange(e) {
@@ -17,7 +23,23 @@ function Login({ onLogin }) {
     setFormValue({
       ...formValue,
       [name]: value
-    })
+    });
+
+    if (name === "email") {
+      if (!value.includes("@")) {
+        setEmailError("Email должен содержать @");
+      } else {
+        setEmailError("");
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 8) {
+        setPasswordError("Пароль должен содержать минимум 8 символов");
+      } else {
+        setPasswordError("");
+      }
+    }
   }
 
   return (
@@ -35,7 +57,10 @@ function Login({ onLogin }) {
           required />
         <span
           className="authorization__span"
-          id="authorization-email-error" />
+          id="authorization-email-error"
+        >
+            {emailError}
+        </span>
         <input
           id="authorization-password-error"
           type="password"
@@ -47,13 +72,16 @@ function Login({ onLogin }) {
           required />
         <span
           className="authorization__span"
-          id="authorization-password-error" />
+          id="authorization-password-error"
+        >
+            {passwordError}
+        </span>
         <button
           className="authorization__submit-button"
           type="submit"
           title="Войти"
         >
-          Войти
+          {isPreloading ? "Загрузка..." : "Войти"}
         </button>
       </form>
     </div>
