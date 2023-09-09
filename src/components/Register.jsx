@@ -27,7 +27,7 @@ function Register({ onRegister, isPreloading }) {
     }
 
     if (name === "password") {
-      if (value.length < 8) {
+      if (value.length < 6) {
         setPasswordError("Пароль должен содержать минимум 8 символов");
       } else {
         setPasswordError("");
