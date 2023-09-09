@@ -35,7 +35,7 @@ function Login({ onLogin, isPreloading }) {
 
     if (name === "password") {
       if (value.length < 6) {
-        setPasswordError("Пароль должен содержать минимум 8 символов");
+        setPasswordError("Пароль должен содержать минимум 6 символов");
       } else {
         setPasswordError("");
       }

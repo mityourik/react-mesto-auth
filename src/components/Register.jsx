@@ -28,7 +28,7 @@ function Register({ onRegister, isPreloading }) {
 
     if (name === "password") {
       if (value.length < 6) {
-        setPasswordError("Пароль должен содержать минимум 8 символов");
+        setPasswordError("Пароль должен содержать минимум 6 символов");
       } else {
         setPasswordError("");
       }
@@ -38,8 +38,6 @@ function Register({ onRegister, isPreloading }) {
   function handleSubmit(e) {
     e.preventDefault();
     const { email, password } = userData;
-    setIsLoading(true);
-    onRegister(password, email);// вызов функции с данными пользователя для передачи
     if (!emailError && !passwordError) {
       onRegister(password, email);
     }

@@ -4,7 +4,7 @@
 
 # Проектная работа: Mesto. Двенадцатый спринт
 
-[Посмотреть мою работу](https://mityourik.github.io/mesto-react/)
+[Посмотреть мою работу](https://mityourik.github.io/react-mesto-auth/)
 
 ## Описание проекта
 
