@@ -281,8 +281,7 @@
               path="*"
               element={
                 <Navigate
-                  to="/mesto-react"
-                  replace />}
+                  to={loggedIn ? "/" : "/sign-in"} />}
             />
           </Routes>
 

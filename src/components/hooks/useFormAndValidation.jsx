@@ -6,18 +6,21 @@ export function useFormAndValidation() {
   const [isValid, setIsValid] = useState(true);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: e.target.validationMessage });
-    setIsValid(e.target.closest('form').checkValidity());
-
-    if (!value) { //проверка на пустые поля
-      setErrors({...errors, [name]: ""});
+    const { name, value } = e.target;//деструктуризация объекта события
+    const form = e.target.closest('form');//ближайшая родительская форма относительно текущего элемента
+    
+    //валидация
+    let errorMessage = ""; // переменная пустой ошибки
+    if (!value) { //проверка значени инпутов если пустые
+        errorMessage = "";//то очистить
     } else {
-      setErrors({...errors, [name]: e.target.validationMessage});
+        errorMessage = e.target.validationMessage;//показать станд сообщение об ошибке
     }
-
-    setIsValid(e.target.closest('form').checkValidity());
+    
+    //обновление состояний
+    setValues(prevValues => ({ ...prevValues, [name]: value }));
+    setErrors(prevErrors => ({ ...prevErrors, [name]: errorMessage }));
+    setIsValid(form.checkValidity());//обновление состояния валидности формы на соответствие паттерну
   };
 
   const resetForm = useCallback(

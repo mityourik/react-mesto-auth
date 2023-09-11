@@ -31,7 +31,7 @@ const Popup = ({ isOpen, name, onClose, children }) => {
       className={`popup ${isOpen ? "popup_opened" : ""} popup_content_${name}`}
       onClick={handleOverlay}
     >
-        <div className={`popup__container_content_${name}`} onClick={handleContainerClick}>
+        <div className={`popup__container popup__container_content_${name}`} onClick={handleContainerClick}>
             <button
                 className='button popup__close-button'
                 type='button'
