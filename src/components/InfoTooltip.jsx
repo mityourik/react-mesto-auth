@@ -13,7 +13,7 @@ function InfoTooltip({ tooltipIcon, title, isOpen, onClose }) {
 
   return (
     <div className={`popup popup_content_tooltip ${isOpen ? "popup_opened" : ""}`} onClick={handleOverlayClick}>
-      <div className="popup__container-tooltip">
+      <div className="popup__container_content_tooltip">
         <div className="popup__icon-tooltip">
           {tooltipIcon === "success" && (
             <img src={doneIcon} alt="Изображение Выполнено" />

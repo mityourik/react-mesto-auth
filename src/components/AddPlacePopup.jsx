@@ -1,47 +1,41 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
-import { FormValidator } from '../utils/FormValidator';
-import { validationSettings } from '../utils/constants';
+import { useFormAndValidation } from './hooks/useFormAndValidation';
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace, isPreloading, onOverlayClose }) {
-  const [placeName, setPlaceName] = useState('');
-  const [placeLink, setPlaceLink] = useState('');
-  const formRef = useRef(null);
-  const formValidatorRef = useRef(null);//ref для FormValidator
+function AddPlacePopup({ 
+  isOpen, 
+  onClose, 
+  onAddPlace, 
+  isPreloading
+  }) {
+  
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddPlace({
-      name: placeName,
-      link: placeLink,
-    });
-  }
-
-  useEffect(() => {
-    setPlaceName('');
-    setPlaceLink('');
-  }, [isOpen])
-
-  useEffect(() => {
-    if (isOpen && formRef.current) {
-        if (!formValidatorRef.current) {
-            formValidatorRef.current = new FormValidator(validationSettings, formRef.current);
-            formValidatorRef.current.enableValidation();
-        }
-        formValidatorRef.current.resetValidation();//сброс ошибки валидации при открытии попапа
+    if (isValid) {
+      onAddPlace({
+        name: values.elements_input_name,
+        link: values.elements_input_link,
+      });
+      resetForm();
     }
-  }, [isOpen]);
+  }
 
   return (
     <PopupWithForm
-        ref={formRef}
         name="cell"
         title="Новое место"
         textButton={isPreloading ? 'Сохранение...' : 'Создать'}
         isOpen={isOpen}
         onClose={onClose}
         onSubmit={handleSubmit}
-        onOverlayClose={onOverlayClose}
     >
         <input
             id="name-card"
@@ -52,13 +46,15 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isPreloading, onOverlayClo
             minLength="2"
             maxLength="30"
             required
-            value={placeName ?? ""}
-            onChange={(e) => setPlaceName(e.target.value)}
+            value={values.elements_input_name || ""}
+            onChange={handleChange}
         />
         <span 
             id="name-card-error" 
             className="popup__error"
-        ></span>
+        >
+            {errors.elements_input_name}
+        </span>
         <input
             id="input-link"
             type="url"
@@ -66,13 +62,15 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isPreloading, onOverlayClo
             className="popup__input popup__input_type_link"
             placeholder="Введите адрес картинки"
             required
-            value={placeLink ?? ""}
-            onChange={(e) => setPlaceLink(e.target.value)}
+            value={values.elements_input_link || ""}
+            onChange={handleChange}
         />
         <span 
             id="input-link-error"
             className="popup__error"
-        ></span>
+        >
+            {errors.elements_input_link}
+        </span>
     </PopupWithForm>
   )
 }
