@@ -16,7 +16,7 @@ export const register = async (password, email) => {//функция для ре
     },
     body: JSON.stringify({ password, email })
   });
-  return checkResponse(response);
+  return checkResponse(response); 
 };
 
 export const authorize = async (password, email) => {//функция для авторизации
