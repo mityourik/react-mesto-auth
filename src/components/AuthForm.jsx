@@ -46,13 +46,13 @@ function AuthForm({ title, children, onSubmit, buttonText, isPreloading }) {
             >
                 {errors.password}
             </span>
-                {children}
             <button 
                 className="authorization__submit-button" 
                 type="submit"
             >
                 {isPreloading ? "Загрузка..." : buttonText}
             </button>
+                {children}
         </form>
     </div>
   );

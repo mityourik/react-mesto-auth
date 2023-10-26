@@ -224,7 +224,7 @@
       setIsPreloading(true);
       auth.register(password, email)
         .then(() => {
-          navigate("/sign_in");
+          navigate("/sign-in");
           onRegister();
         })
         .catch(err => {

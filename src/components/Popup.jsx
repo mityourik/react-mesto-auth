@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+// eslint-disable-next-line react/prop-types
 const Popup = ({ isOpen, name, onClose, children }) => {
   useEffect(() => {
     if (!isOpen) return;
