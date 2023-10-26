@@ -96,7 +96,7 @@ export class Api {
 
 //класс для апи
 export const api = new Api({
-  url: 'https://mityourik.nomoredomainsrocks.ru/',
+  url: 'https://api.mityourik.nomoredomainsrocks.ru/',
   headers: {
     'Content-Type': 'application/json',
     authorization: 'a2b723e3-a104-4268-8462-81c1140190b0'
