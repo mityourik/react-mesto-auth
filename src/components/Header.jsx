@@ -28,8 +28,8 @@ function Header({ email, signOut, loggedIn }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const path = (location.pathname === '/sign-in') ? '/sign-up' : 'sign-in';
-  const linkName = (location.pathname === '/sign-in') ? 'Регистрация' : 'Войти';
+  const path = (location.pathname === '/signin') ? '/signup' : 'signin';
+  const linkName = (location.pathname === '/signin') ? 'Регистрация' : 'Войти';
 
   return (
     <header className="header">
@@ -57,7 +57,7 @@ function Header({ email, signOut, loggedIn }) {
           <p className="header__email">{email}</p>
           <Link
             className="header__auth-link"
-            to="/sign-in"
+            to="/signin"
             onClick={signOut}
           >
             Выйти

@@ -16,7 +16,7 @@ function Register({ onRegister, isPreloading }) {
       buttonText="Зарегистрироваться"
       isPreloading={isPreloading}
     >
-      <Link className="authorization__link" to="/sign-in">
+      <Link className="authorization__link" to="/signin">
         Уже зарегистрированы? Войти
       </Link>
     </AuthForm>

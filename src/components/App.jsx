@@ -101,7 +101,7 @@
     };
 
     const handleCardLike = (card) => {
-      const isLiked = card.likes.some(i => i._id === currentUser._id);
+      const isLiked = card.likes.some(id => id === currentUser._id);
       const likeRequest = isLiked ? api.removeCardLike(card._id) : api.pushCardLike(card._id);
 
       likeRequest.then((newCard) => {
@@ -186,12 +186,12 @@
     }
 
     function checkToken() {// проверка токена пользователя
-      const jwt = localStorage.getItem('jwt');//получить токен из локального хранилища
-      if (jwt) {//если наличие токена тру
-        auth.getContent(jwt)//вызываем ф-ю получения инф-ии
+      const token = localStorage.getItem('jwt');//получить токен из локального хранилища
+      if (token) {//если наличие токена тру
+        auth.getContent(token)//вызываем ф-ю получения инф-ии
           .then((res) => {
             setLoggedIn(true);
-            setEmail(res.data.email);//получаем значение email
+            setEmail(res.email);//получаем значение email
             navigate("/");
           })
           .catch(err => console.log(err));
@@ -206,7 +206,7 @@
       setIsPreloading(true);
       auth.authorize(password, email)
         .then(res => {
-          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('jwt', res._id);
           checkToken(); //получить email после успешной авторизации
         })
         .then(() => {//второй блок then чтобы залогинить после получения почты
@@ -224,7 +224,7 @@
       setIsPreloading(true);
       auth.register(password, email)
         .then(() => {
-          navigate("/sign-in");
+          navigate("/signin");
           onRegister();
         })
         .catch(err => {
@@ -263,7 +263,7 @@
               />}
             />
             <Route 
-              path="/sign-in" 
+              path="/signin" 
               element={
                 <Login
                   isPreloading={isPreloading}
@@ -271,7 +271,7 @@
                   setEmail={setEmail} />}
             />
             <Route
-              path="/sign-up"
+              path="/signup"
               element={
                 <Register
                   isPreloading={isPreloading}
@@ -281,7 +281,7 @@
               path="*"
               element={
                 <Navigate
-                  to={loggedIn ? "/" : "/sign-in"} />}
+                  to={loggedIn ? "/" : "/signin"} />}
             />
           </Routes>
 

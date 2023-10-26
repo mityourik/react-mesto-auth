@@ -11,26 +11,36 @@ export class Api {
     throw new Error(`Ошибка ${res.status}`);
   }
 
-  async _fetchData(url, options) {// метод для отправки запроса на сервер и обработки его ответа
+  async _fetchData(url, options) {
     try {
       const response = await fetch(url, options);
-      return this._handleResponse(response);
+      if (response.ok && response.status !== 204) { // проверка, что не пустой прежде чем преобразовать в json
+        return response.json();
+      } else if (response.ok && response.status === 204) {
+        return {}; // просто возвращаем пустой объект
+      } else {
+        throw new Error(`Ошибка ${response.status}`);
+      }
     } catch (error) {
       throw new Error('Ошибка сети');
     }
   }
 
   get _userUrl() {//геттер для формирования URL для получения и изменения информации о пользователе
-    return `${this._url}/users/me`;
+    return `${this._url}users/me`;
   }
 
   async getUserInfoApi() {// метод для получения информации о пользователе
-    return this._fetchData(this._userUrl, { headers: this._headers });
+    return this._fetchData(this._userUrl, {
+      credentials: "include",
+      headers: this._headers,
+    });
   }
 
   async setUserInfoApi(data) {// метод для обновления информации о пользователе
     return this._fetchData(this._userUrl, {
       method: 'PATCH',
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -40,16 +50,20 @@ export class Api {
   }
 
   get _cardsUrl() {//геттер для формирования URL для работы с карточками
-    return `${this._url}/cards`;
+    return `${this._url}cards`;
   }
 
   async getInitialCards() {//метод для получения карточек с сервера
-    return this._fetchData(this._cardsUrl, { headers: this._headers });
+    return this._fetchData(this._cardsUrl, {
+      credentials: "include",
+      headers: this._headers
+    });
   }
 
   async putNewCard(data) {//метод для добавления новой карточки
     return this._fetchData(this._cardsUrl, {
       method: 'POST',
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -59,12 +73,13 @@ export class Api {
   }
 
   _getCardUrl(cardId) { //геттер для формирования URL для работы с отдельной карточкой
-    return `${this._url}/cards/${cardId}`;
+    return `${this._url}cards/${cardId}`;
   }
 
   async deleteCard(cardId) {//метод для удаления карточки
     return this._fetchData(this._getCardUrl(cardId), {
       method: 'DELETE',
+      credentials: "include",
       headers: this._headers
     });
   }
@@ -72,6 +87,7 @@ export class Api {
   async pushCardLike(cardId) {//метод для добавления лайка
     return this._fetchData(`${this._getCardUrl(cardId)}/likes`, {
       method: 'PUT',
+      credentials: "include",
       headers: this._headers
     });
   }
@@ -79,6 +95,7 @@ export class Api {
   async removeCardLike(cardId) {//метод для удаления лайка
     return this._fetchData(`${this._getCardUrl(cardId)}/likes`, {
       method: 'DELETE',
+      credentials: "include",
       headers: this._headers
     });
   }
@@ -86,6 +103,7 @@ export class Api {
   async patchUserAvatar(data) {//метод для обновления аватара пользователя
     return this._fetchData(`${this._userUrl}/avatar`, {
       method: 'PATCH',
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
@@ -96,9 +114,8 @@ export class Api {
 
 //класс для апи
 export const api = new Api({
-  url: 'https://api.mityourik.nomoredomainsrocks.ru/',
+  url: 'http://localhost:3000/',
   headers: {
     'Content-Type': 'application/json',
-    authorization: 'a2b723e3-a104-4268-8462-81c1140190b0'
   }
 });

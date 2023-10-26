@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co";
+export const BASE_URL = "http://localhost:3000";
 
 async function checkResponse(res) {// проверка ответа от сервера на ошибки
   if (res.ok) {
@@ -11,6 +11,7 @@ async function checkResponse(res) {// проверка ответа от сер�
 export const register = async (password, email) => {//функция для регистрации
   const response = await fetch(`${BASE_URL}/signup`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       "Content-Type": "application/json"
     },
@@ -22,6 +23,7 @@ export const register = async (password, email) => {//функция для ре
 export const authorize = async (password, email) => {//функция для авторизации
   const response = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json"
     },
@@ -30,12 +32,12 @@ export const authorize = async (password, email) => {//функция для а�
   return checkResponse(response);
 };
 
-export const getContent = async (token) => {//функция для получения контента пользователя
+export const getContent = async () => {//функция для получения контента пользователя <-----убрал token из аргумента
   const response = await fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`// заголовок с токеном авторизации
     }
   });
   return checkResponse(response);
