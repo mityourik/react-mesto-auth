@@ -224,7 +224,7 @@
       setIsPreloading(true);
       auth.register(password, email)
         .then(() => {
-          navigate("signin");
+          navigate("/signin");
           onRegister();
         })
         .catch(err => {
@@ -263,7 +263,7 @@
               />}
             />
             <Route 
-              path="signin" 
+              path="/signin" 
               element={
                 <Login
                   isPreloading={isPreloading}
@@ -271,7 +271,7 @@
                   setEmail={setEmail} />}
             />
             <Route
-              path="signup"
+              path="/signup"
               element={
                 <Register
                   isPreloading={isPreloading}
@@ -281,7 +281,7 @@
               path="*"
               element={
                 <Navigate
-                  to={loggedIn ? "" : "signin"} />}
+                  to={loggedIn ? "/" : "/signin"} />}
             />
           </Routes>
 

@@ -27,7 +27,7 @@ export class Api {
   }
 
   get _userUrl() {//геттер для формирования URL для получения и изменения информации о пользователе
-    return `${this._url}/users/me`;
+    return `${this._url}users/me`;
   }
 
   async getUserInfoApi() {// метод для получения информации о пользователе
