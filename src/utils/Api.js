@@ -27,7 +27,7 @@ export class Api {
   }
 
   get _userUrl() {//геттер для формирования URL для получения и изменения информации о пользователе
-    return `${this._url}users/me`;
+    return `${this._url}/users/me`;
   }
 
   async getUserInfoApi() {// метод для получения информации о пользователе
@@ -50,7 +50,7 @@ export class Api {
   }
 
   get _cardsUrl() {//геттер для формирования URL для работы с карточками
-    return `${this._url}cards`;
+    return `${this._url}/cards`;
   }
 
   async getInitialCards() {//метод для получения карточек с сервера
@@ -73,7 +73,7 @@ export class Api {
   }
 
   _getCardUrl(cardId) { //геттер для формирования URL для работы с отдельной карточкой
-    return `${this._url}cards/${cardId}`;
+    return `${this._url}/cards/${cardId}`;
   }
 
   async deleteCard(cardId) {//метод для удаления карточки
@@ -115,7 +115,7 @@ export class Api {
 //класс для апи
 export const api = new Api({
   // url: 'http://localhost:3000/',
-  url: "https://api.mityourik.nomoredomainsrocks.ru",
+  url: "https://api.mityourik.nomoredomainsrocks.ru/",
   headers: {
     'Content-Type': 'application/json',
   }
