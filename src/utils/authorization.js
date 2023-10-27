@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3000";
+// export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.mityourik.nomoredomainsrocks.ru";
 
 async function checkResponse(res) {// проверка ответа от сервера на ошибки
   if (res.ok) {
