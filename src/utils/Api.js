@@ -114,8 +114,8 @@ export class Api {
 
 //класс для апи
 export const api = new Api({
-  // url: 'http://localhost:3000/',
-  url: "https://api.mityourik.nomoredomainsrocks.ru",
+  url: 'http://localhost:3000',
+  // url: "https://api.mityourik.nomoredomainsrocks.ru",
   headers: {
     'Content-Type': 'application/json',
   }
