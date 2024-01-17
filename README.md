@@ -1,7 +1,3 @@
-<div align="left">
-  <img src="https://i.postimg.cc/q75GkbJC/image-png.png" alt="Logo" width="150" height="150">
-</div>
-
 # Проектная работа: Mesto. Двенадцатый спринт
 
 [Посмотреть мою работу](https://mityourik.github.io/react-mesto-auth/)
